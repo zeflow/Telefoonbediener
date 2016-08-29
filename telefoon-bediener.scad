@@ -1,22 +1,43 @@
-translate([-20,00,10]) color("Black") cube([20,145,40]);
-translate([175,00,10]) color("Black") cube([20,145,40]);
-translate([-30,135,30]) rotate([0,90,0]) color("Grey") cylinder(r=2,h=240);
-translate([-30,115,30]) rotate([0,90,0]) color("Grey") cylinder(r=2,h=240);
-translate([-30,115,30]) rotate([0,90,0]) color("Grey") cylinder(r=1,h=240);
-$fn=100;
-//translate([175,00,10]) color("Black") cube([20,145,40]);
+$fn=10;
+servoposx=105;
+servoposy=50;
+servoposz=30;
 
-translate([50,90,26]) rotate([0,270,00]) 9g_motor();
-translate([25,68,37]) color("White")  armpje(4,10);
-translate([55,90,54]) rotate([0,270,00]) 9g_motor();
-translate([30,68,65]) color("White")  armpje(4,40);
+difference(){
+union(){
+    translate([-20,70,10]) color("Black") cube([100,60,70]);
+
+}
+    union(){
+        translate([10,60,30]) #cube([50,50,60]);            
+
+    }
+}
+
+        translate([servoposy,servoposx,servoposz]) rotate([90,0,270]) #9g_motor()
+        translate([servoposy+5,servoposx-5,servoposz+12.5]) rotate([90,0,270]) #9g_motor();
+        translate([servoposy+10,servoposx,servoposz+25]) rotate([90,0,270]) #9g_motor();
+        translate([servoposy+15,servoposx-5,servoposz+37.5]) rotate([90,0,270]) #9g_motor();
 
 
+translate([-20,-11,35]) color("Black") cube([100,5,70-35+10]);
+translate([70,135,70]) rotate([90,00,0]) color("Grey") cylinder(r=2,h=150);
+translate([-10,135,70]) rotate([90,00,0]) color("Grey") cylinder(r=2,h=150);
 
+
+translate([25,68,37]) color("White")  armpje(4,30,10,15);
 telefoon();
 
 
-module armpje(dikte,lengte){
+module armpje(dikte,lengte,hoogteservo,hoogtepootje){
+    union(){
+          translate([dikte,0,21]) rotate([270,0,0]) cube([dikte,3,lengte]);    
+          translate([dikte,0,21]) rotate([180,0,0]) cube([dikte,3,hoogtepootje]);
+          translate([dikte,lengte,21]) rotate([180,0,0]) cube([dikte,3,hoogteservo]);        
+    }
+}
+
+module armpjerond(dikte,lengte){
     union(){
         translate([dikte,0,21]) rotate([0,180,0]) cube([dikte,3,lengte]);    
         translate([0,19,-10]) cube([dikte,3,10]); 
